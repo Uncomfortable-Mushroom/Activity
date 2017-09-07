@@ -13,26 +13,27 @@ import android.widget.Toast;
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
     String te,s;
     EditText editText;
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_layout);
         Intent intent=getIntent();
-        te= intent.getStringExtra("editText");
-        editText.setText("接收到的数据为"+te);
+        te= intent.getStringExtra("editText").toString().trim();
+        editText= (EditText) findViewById(R.id.edit);
+        editText.setText(te);
         Button button=(Button)findViewById(R.id.button);
         button.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-         editText= (EditText) findViewById(R.id.edit);
          s=editText.getText().toString();
         switch(view.getId()){
             case R.id.button:
                 Intent intent=new Intent();
                 intent.putExtra("return_data",s);
-                setResult(RESULT_OK,intent);
+                setResult(2,intent);
                 finish();
                 break;
             default:
